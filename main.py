@@ -34,9 +34,13 @@ def do_stuff(domain):
 	except timeout, e:
 		title = "Unavailable Site"
 	except urllib2.HTTPError, error:
-		title = "Unavailable site"
-	except urllib2.URLError, error:
-                title = "Unavailable site"
+#		title = "Unavailable site 2"
+		try:
+			soup = BeautifulSoup(urllib2.urlopen("https://" + domain, timeout=5))
+		except:
+			title = "Blank or Unreadable Title"
+#	except urllib2.URLError, error:
+#               title = "Unavailable site 3"
 	except:
 		title = "Blank or Unreadable Title"
 	try:
